@@ -2,7 +2,7 @@
 class Pessoa
 {
   private static $conn;
-  
+
   public static function getConnection()
   {
     if (empty(self::$conn))
@@ -12,23 +12,23 @@ class Pessoa
   		$name = $conexao['name'];
   		$user = $conexao['user'];
   		$pass = $conexao['pass'];
-  		
-      self::$conn = new PDO("pgsql:dbname={$name};user={$user};password={$pass};host={$host}");
-      self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        self::$conn = new PDO("mysql:dbname={$name};user={$user};password={$pass};host={$host}");
+        self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     return self::$conn;
   }
-   
+
   public static function save($pessoa)
   {
     $conn = self::getConnection();
-    
+
     if (empty($pessoa['id']))
     {
       $result = $conn->query("SELECT max(id) as next FROM pessoa");
       $row = $result->fetch();
       $pessoa['id'] = (int) $row['next'] +1;
-      
+
       $sql = "INSERT INTO pessoa (id, nome, endereco, bairro,
                                   telefone, email, id_cidade)
                          VALUES ( :id, :nome, :endereco,
@@ -46,7 +46,7 @@ class Pessoa
                                 id_cidade = :id_cidade
                           WHERE id = :id";
     }
-    
+
     $result = $conn->prepare($sql);
     $result->execute([':id'        => $pessoa['id'],
                       ':nome'      => $pessoa['nome'],
@@ -57,24 +57,24 @@ class Pessoa
                       ':id_cidade' => $pessoa['id_cidade'],
                      ]);
   }
-  
+
   public static function find($id)
   {
     $conn = self::getConnection();
-    
+
     $result = $conn->prepare("SELECT * FROM pessoa WHERE id=:id");
     $result->execute([':id'=>$id]);
     return $result->fetch();
   }
-  
+
   public static function delete($id)
   {
     $conn = self::getConnection();
-    
+
     $result = $conn->prepare("DELETE FROM pessoa WHERE id=:id");
     $result->execute([':id'=>$id]);
   }
-  
+
   public static function all()
   {
     $conn = self::getConnection();
