@@ -66,3 +66,8 @@ Route::any('teste1', function () {
 Route::match([ 'get', 'post'], '/teste2', function () {
     return 'Teste mesmo 2';
 });
+
+Route::get('task1', 'TaskController@home');
+Route::get('task2', 'TaskController@home2');
+
+Route::resource('cliente', 'ClienteController');
