@@ -28,6 +28,7 @@ class ClienteController extends Controller
     public function index()
     {
          $clientes = session('clientes');
+         # $clientes = [];
          $titulo = 'Nome do software';
         # dd($clientes);
         # return view('clientes.index',compact(['clientes','titulo']));
