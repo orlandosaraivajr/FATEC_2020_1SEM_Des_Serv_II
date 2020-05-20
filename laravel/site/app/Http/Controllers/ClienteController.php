@@ -28,8 +28,13 @@ class ClienteController extends Controller
     public function index()
     {
          $clientes = session('clientes');
+         $titulo = 'Nome do software';
         # dd($clientes);
-        return view('clientes.index',compact(['clientes']));
+        # return view('clientes.index',compact(['clientes','titulo']));
+        # return view('clientes.index',['clientes'=>$clientes,'titulo'=>$titulo]);
+        return view('clientes.index')
+            ->with('clientes',$clientes)
+            ->with('titulo',$titulo);
     }
 
     /**
