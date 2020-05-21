@@ -10,5 +10,9 @@
         <input type="text" name="nome" value="{{ $cliente['nome']}}">
         <input type="submit" value="Salvar">
     </form>
-
+    @component('componentes.alerta', ['titulo'=>'Vai dar ruim','tipo'=>'error']
+)
+        <p><strong>Cuidado ao editar</strong></p>
+        <p>VAI dar erro !</p>
+    @endcomponent
 @endsection

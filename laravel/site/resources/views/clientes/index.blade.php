@@ -21,4 +21,11 @@
     @else
         <br>Nenhum cliente cadastrado.
     @endif
+
+    @component('componentes.alerta', ['titulo'=>'Erro #1','tipo'=>'info']
+)
+        <p><strong>Erro Inesperado</strong></p>
+        <p>Ocorreu um erro inesperado </p>
+    @endcomponent
+
 @endsection
